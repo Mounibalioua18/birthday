@@ -1,19 +1,20 @@
-let showCake = false;
+let cakeDrawn = false;
+let p5Instance;
 
 function setup() {
   let canvas = createCanvas(600, 600);
-  canvas.parent('body');
+  canvas.parent(document.getElementById('startButton').parentNode); // Attach to body via button's parent
   canvas.style('display', 'none'); // Hidden until button click
   background('#FFFDD0');
-  console.log("Setup complete"); // Debug
+  console.log("Setup complete");
 }
 
 function draw() {
-  if (!showCake) return;
+  if (!cakeDrawn) return;
 
-  console.log("Drawing cake"); // Debug
-  canvas.style('display', 'block'); // Show canvas
-  document.getElementById('startButton').style.display = 'none'; // Hide button
+  console.log("Drawing cake");
+  canvas.style('display', 'block');
+  document.getElementById('startButton').style.display = 'none';
 
   // Draw cake layers
   drawLayer(-220, 405, 400, 10, '#FFC0CB', '#000000'); // Base
@@ -43,7 +44,7 @@ function draw() {
   textSize(17);
   text('ANNIVERSAIRE', 300, 510);
 
-  noLoop(); // Stop after one frame
+  noLoop();
 }
 
 function drawLayer(x, y, w, h, fillColor, strokeColor) {
@@ -86,7 +87,9 @@ function drawCircle(x, y, r, fillColor, strokeColor) {
 }
 
 // Button click handler
-document.getElementById('startButton').addEventListener('click', function() {
-  console.log("Button clicked"); // Debug
-  showCake = true;
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('startButton').addEventListener('click', () => {
+    console.log("Button clicked");
+    cakeDrawn = true;
+  });
 });
