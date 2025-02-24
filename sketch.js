@@ -5,11 +5,13 @@ function setup() {
   canvas.parent('body');
   canvas.style('display', 'none'); // Hidden until button click
   background('#FFFDD0');
+  console.log("Setup complete"); // Debug
 }
 
 function draw() {
-  if (!showCake) return; // Only draw if button clicked
+  if (!showCake) return;
 
+  console.log("Drawing cake"); // Debug
   canvas.style('display', 'block'); // Show canvas
   document.getElementById('startButton').style.display = 'none'; // Hide button
 
@@ -19,7 +21,7 @@ function draw() {
   drawLayer(-135, 355, 240, 20, '#55FF55', '#000000'); // Green
   drawLayer(-135, 295, 240, 60, '#B87333', '#000000'); // Brown
 
-  // Toppings (simplified)
+  // Toppings
   drawTopping(-120, 235, '#C20067');
   drawTopping(-80, 235, '#FFFF00');
   drawTopping(25, 235, '#FF0000');
@@ -41,48 +43,50 @@ function draw() {
   textSize(17);
   text('ANNIVERSAIRE', 300, 510);
 
-  noLoop(); // Stop drawing after one frame
+  noLoop(); // Stop after one frame
 }
 
 function drawLayer(x, y, w, h, fillColor, strokeColor) {
   stroke(strokeColor);
   strokeWeight(3);
   fill(fillColor);
-  rect(x + 300, y, w, h); // Adjusted x to center
+  rect(x + 300, y, w, h);
 }
 
 function drawTopping(x, y, color) {
   noStroke();
   fill(color);
-  arc(x + 300, y, 20, 20, PI, 0); // Adjusted x
+  arc(x + 300, y, 20, 20, PI, 0);
 }
 
 function drawCandle(x, y, fillColor, strokeColor) {
   stroke(strokeColor);
   strokeWeight(3);
   fill(fillColor);
-  rect(x + 300, y, 25, 60); // Adjusted x
+  rect(x + 300, y, 25, 60);
 }
 
 function drawStick(x, y, color, weight) {
   stroke(color);
   strokeWeight(weight);
-  line(x + 300, y, x + 300, y - 12); // Adjusted x
+  line(x + 300, y, x + 300, y - 12);
 }
 
 function drawLongStick(x, y, color) {
   stroke(color);
   strokeWeight(3);
-  line(x + 300, y, x + 300, y + 200); // Adjusted x
+  line(x + 300, y, x + 300, y + 200);
 }
 
 function drawCircle(x, y, r, fillColor, strokeColor) {
   stroke(strokeColor);
   strokeWeight(3);
   fill(fillColor);
-  circle(x + 300, y, r * 2); // Adjusted x
+  circle(x + 300, y, r * 2);
 }
 
-document.getElementById('startButton').addEventListener('click', () => {
+// Button click handler
+document.getElementById('startButton').addEventListener('click', function() {
+  console.log("Button clicked"); // Debug
   showCake = true;
 });
