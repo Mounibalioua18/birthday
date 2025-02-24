@@ -22,6 +22,7 @@
       border: none; 
       border-radius: 10px; 
       cursor: pointer; 
+      position: absolute; /* Keep button on top */
     }
     button:hover { background: #C20067; }
     canvas { display: none; }
@@ -35,34 +36,33 @@ let cakeDrawn = false;
 
 function setup() {
   let canvas = createCanvas(600, 600);
-  canvas.parent(document.getElementById('startButton').parentNode);
+  canvas.parent(document.body);
   canvas.style('display', 'none');
-  background('#FFFDD0');
 }
 
 function draw() {
   if (!cakeDrawn) return;
-
+  
+  // Clear previous drawings
+  background('#FFFDD0');
+  
+  // Make canvas visible
   canvas.style('display', 'block');
   document.getElementById('startButton').style.display = 'none';
 
-  // Draw cake layers
+  // Draw cake elements
   drawLayer(-220, 405, 400, 10, '#FFC0CB', '#000000');
   drawLayer(-135, 375, 240, 30, '#A020F0', '#000000');
   drawLayer(-135, 355, 240, 20, '#55FF55', '#000000');
   drawLayer(-135, 295, 240, 60, '#B87333', '#000000');
 
-  // Toppings
   drawTopping(-120, 235, '#C20067');
   drawTopping(-80, 235, '#FFFF00');
   drawTopping(25, 235, '#FF0000');
   drawTopping(59, 235, '#0000FF');
 
-  // Candle
   drawCandle(-40, 235, '#FFF44F', '#000000');
   drawStick(-26, 310, '#181A18', 7);
-
-  // Stick and circle
   drawLongStick(0, 235, '#181A18');
   drawCircle(100, 460, 100, '#181A18', '#FFFDD0');
 
@@ -77,48 +77,11 @@ function draw() {
   noLoop();
 }
 
-function drawLayer(x, y, w, h, fillColor, strokeColor) {
-  stroke(strokeColor);
-  strokeWeight(3);
-  fill(fillColor);
-  rect(x + 300, y, w, h);
-}
+// Keep all your drawing functions the same as before
 
-function drawTopping(x, y, color) {
-  noStroke();
-  fill(color);
-  arc(x + 300, y, 20, 20, PI, 0);
-}
-
-function drawCandle(x, y, fillColor, strokeColor) {
-  stroke(strokeColor);
-  strokeWeight(3);
-  fill(fillColor);
-  rect(x + 300, y, 25, 60);
-}
-
-function drawStick(x, y, color, weight) {
-  stroke(color);
-  strokeWeight(weight);
-  line(x + 300, y, x + 300, y - 12);
-}
-
-function drawLongStick(x, y, color) {
-  stroke(color);
-  strokeWeight(3);
-  line(x + 300, y, x + 300, y + 200);
-}
-
-function drawCircle(x, y, r, fillColor, strokeColor) {
-  stroke(strokeColor);
-  strokeWeight(3);
-  fill(fillColor);
-  circle(x + 300, y, r * 2);
-}
-
-// Button click handler
 document.getElementById('startButton').addEventListener('click', () => {
   cakeDrawn = true;
+  redraw(); // Force immediate draw execution
   loop();
 });
   </script>
