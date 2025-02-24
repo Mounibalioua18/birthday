@@ -13,6 +13,7 @@
       height: 100vh; 
       margin: 0; 
       font-family: Arial; 
+      position: relative;
     }
     button { 
       padding: 15px 30px; 
@@ -22,7 +23,8 @@
       border: none; 
       border-radius: 10px; 
       cursor: pointer; 
-      position: absolute; /* Keep button on top */
+      position: absolute;
+      z-index: 1;
     }
     button:hover { background: #C20067; }
     canvas { display: none; }
@@ -33,22 +35,20 @@
 
   <script>
 let cakeDrawn = false;
+let myCanvas;
 
 function setup() {
-  let canvas = createCanvas(600, 600);
-  canvas.parent(document.body);
-  canvas.style('display', 'none');
+  myCanvas = createCanvas(600, 600);
+  myCanvas.hide();
+  background('#FFFDD0');
 }
 
 function draw() {
   if (!cakeDrawn) return;
-  
-  // Clear previous drawings
-  background('#FFFDD0');
-  
-  // Make canvas visible
-  canvas.style('display', 'block');
+
+  // Hide button and show canvas
   document.getElementById('startButton').style.display = 'none';
+  myCanvas.show();
 
   // Draw cake elements
   drawLayer(-220, 405, 400, 10, '#FFC0CB', '#000000');
@@ -77,11 +77,10 @@ function draw() {
   noLoop();
 }
 
-// Keep all your drawing functions the same as before
+// Keep all drawing functions the same as before
 
 document.getElementById('startButton').addEventListener('click', () => {
   cakeDrawn = true;
-  redraw(); // Force immediate draw execution
   loop();
 });
   </script>
