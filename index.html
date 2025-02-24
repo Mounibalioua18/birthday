@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Joyeux Anniversaire</title>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
   <style>
-    body { background: #FFFDD0; text-align: center; font-family: Arial; margin: 0; padding: 20px; }
-    img { max-width: 100%; height: auto; }
-    h1 { color: #FF0000; }
+    body { background: #FFFDD0; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; font-family: Arial; }
+    button { padding: 15px 30px; font-size: 20px; background: #FF0000; color: white; border: none; border-radius: 10px; cursor: pointer; }
+    button:hover { background: #C20067; }
+    canvas { display: none; }
   </style>
 </head>
 <body>
-  <h1>Joyeux Anniversaire! ❤️</h1>
-  <img src="cake.png" alt="A birthday cake for you">
+  <button id="startButton">Joyeux Anniversaire</button>
+  <script src="sketch.js"></script>
 </body>
 </html>
